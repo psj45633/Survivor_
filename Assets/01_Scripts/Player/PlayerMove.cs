@@ -3,17 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private Vector2 inputVec;
-    [SerializeField] private float speed;
+    private Vector2 inputVec;
+    private float speed;
 
     Rigidbody2D rb;
-    SpriteRenderer sr;
+    SpriteRenderer[] srs;
+    Animator anim;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        srs = GetComponentsInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
+
+        speed = Player.Instance.Stats.MoveSpeed;
     }
 
     void OnMove(InputValue value)
@@ -28,8 +32,14 @@ public class PlayerMove : MonoBehaviour
 
     private void LateUpdate()
     {
+        bool flip = inputVec.x < 0;
+
+        anim.SetBool("isMove", inputVec != Vector2.zero);
+
         if (Mathf.Abs(inputVec.x) < 0.01f) return;
 
-        sr.flipX = inputVec.x < 0;
+        srs[0].flipX = srs[1].flipX = flip;
+        srs[1].transform.localPosition = new Vector3(flip ? 0.17f : -0.17f, -0.28f, 0);
+
     }
 }
