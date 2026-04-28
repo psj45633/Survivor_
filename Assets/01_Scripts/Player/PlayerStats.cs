@@ -1,59 +1,124 @@
-﻿public class PlayerStats
+﻿using UnityEngine;
+
+[System.Serializable]
+public class PlayerStats
 {
-    public BaseStatData baseData;
-    public WeaponData weaponData;
-    public Equipment equipment;
+    [Header("Source Data")]
+    [SerializeField] private BaseStatData baseData;
+    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private Equipment equipment;
+
+    [Header("Level")]
+    [SerializeField] private int playerLevel = 1;
+    [SerializeField] private int weaponLevel = 1;
+
+    [Header("Final Values")]
+    [SerializeField] private float maxHp;
+    [SerializeField] private float atk;
+    [SerializeField] private float atkSpeed;
+    [SerializeField] private float def;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float range;
 
     public FinalStats finalStats;
 
-    public float MaxHp => finalStats.maxHp.Value;
-    public float Attack => finalStats.atk.Value;
-    public float AttackSpeed => finalStats.atkSpeed.Value;
-    public float Defense => finalStats.def.Value;
-    public float MoveSpeed => finalStats.moveSpeed.Value;
-    public float Range => finalStats.range.Value;
+    public float MaxHp => maxHp;
+    public float Attack => atk;
+    public float AttackSpeed => atkSpeed;
+    public float Defense => def;
+    public float MoveSpeed => moveSpeed;
+    public float Range => range;
 
-    public PlayerStats(BaseStatData baseData, WeaponData weaponData, Equipment equipment)
+    public void Init()
     {
-        this.baseData = baseData;
-        this.weaponData = weaponData;
-        this.equipment = equipment;
         Recalculate();
     }
 
-    public void EquipEquipment(EquipmentData newEquipmentData)
+    public void SetBaseData(BaseStatData baseData)
     {
-        switch (newEquipmentData.type)
+        this.baseData = baseData;
+    }
+
+    public void SetWeapon(WeaponData newWeapon)
+    {
+        weaponData = newWeapon;
+        weaponLevel = DataManager.Instance.GetWeaponLevel(newWeapon);
+        Recalculate();
+    }
+
+    public EquipmentData SetEquipment(EquipmentData newEquipment)
+    {
+        if (newEquipment == null) return null;
+
+        EquipmentData previous = null;
+
+        switch (newEquipment.type)
         {
             case EquipmentType.Head:
-                equipment.head = newEquipmentData;
+                previous = equipment.head;
+                equipment.head = newEquipment;
                 break;
+
             case EquipmentType.Top:
-                equipment.top = newEquipmentData;
+                previous = equipment.top;
+                equipment.top = newEquipment;
                 break;
+
             case EquipmentType.Bottom:
-                equipment.bottom = newEquipmentData;
+                previous = equipment.bottom;
+                equipment.bottom = newEquipment;
                 break;
+
             case EquipmentType.Glove:
-                equipment.glove = newEquipmentData;
+                previous = equipment.glove;
+                equipment.glove = newEquipment;
                 break;
+
             case EquipmentType.Shoe:
-                equipment.shoe = newEquipmentData;
+                previous = equipment.shoe;
+                equipment.shoe = newEquipment;
                 break;
         }
 
         Recalculate();
+        return previous;
     }
 
-    public void EquipWeapon(WeaponData newWeaponData)
+
+
+
+
+    public void LevelUp()
     {
-        weaponData = newWeaponData;
+        playerLevel++;
         Recalculate();
     }
 
+
     public void Recalculate()
     {
+        if (baseData == null || weaponData == null)
+        {
+            Debug.LogWarning("데이터가 설정되지 않음");
+            return;
+        }
+
+        equipment ??= new Equipment();
         equipment.Recalculate();
-        finalStats = new FinalStats(baseData, equipment, weaponData);
+
+        PlayerLevelData playerLvData = baseData.GetLevelData(playerLevel);
+
+        // 여기서 직접 가져오기
+        int weaponLevel = DataManager.Instance.GetWeaponLevel(weaponData);
+        WeaponLevelData weaponLvData = weaponData.GetLevelData(weaponLevel);
+
+        finalStats = new FinalStats(playerLvData, weaponLvData, equipment, baseData);
+
+        maxHp = finalStats.maxHp.Value;
+        atk = finalStats.atk.Value;
+        atkSpeed = finalStats.atkSpeed.Value;
+        def = finalStats.def.Value;
+        moveSpeed = finalStats.moveSpeed.Value;
+        range = finalStats.range.Value;
     }
 }

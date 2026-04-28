@@ -7,5 +7,7 @@ public class EquipmentData : ScriptableObject
 
     public float maxHp;
     public float atk;
+    public float atkSpeed;
     public float def;
+    public float moveSpeed;
 }

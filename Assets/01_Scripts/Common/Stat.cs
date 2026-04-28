@@ -26,9 +26,18 @@ public class Equipment
     public EquipmentData glove;
     public EquipmentData shoe;
 
-    public float maxHp;
-    public float atk;
-    public float def;
+    private float maxHp;
+    private float atk;
+    private float atkSpeed;
+    private float def;
+    private float moveSpeed;
+
+    public float MaxHp => maxHp;
+    public float Atk => atk;
+    public float AtkSpeed => atkSpeed;
+    public float Def => def;
+    public float MoveSpeed => moveSpeed;
+
 
     public void Recalculate()
     {
@@ -44,7 +53,9 @@ public class Equipment
 
             maxHp += equipment.maxHp;
             atk += equipment.atk;
+            atkSpeed += equipment.atkSpeed;
             def += equipment.def;
+            moveSpeed += equipment.moveSpeed;
         }
     }
 }
@@ -58,14 +69,15 @@ public class FinalStats
     public Stat moveSpeed;
     public Stat range;
 
-    public FinalStats(BaseStatData baseData, Equipment equipmentStats, WeaponData weaponData)
+    public FinalStats(PlayerLevelData playerLvData, WeaponLevelData weaponLvData, Equipment equipmentStats, BaseStatData baseData)
     {
-        maxHp     = new Stat(baseData.maxHp     , equipmentStats.maxHp);
-        atk       = new Stat(baseData.atk       , equipmentStats.atk + weaponData.atk);
-        atkSpeed  = new Stat(baseData.atkSpeed  , 0f                                       , 1f + weaponData.atkSpeed/100);
-        def       = new Stat(baseData.def       , equipmentStats.def);
-        moveSpeed = new Stat(baseData.moveSpeed);
-        range     = new Stat(baseData.range     , weaponData.range);
+        maxHp     = new Stat(playerLvData.maxHp,     equipmentStats.MaxHp);
+        atk       = new Stat(playerLvData.atk,       equipmentStats.Atk + weaponLvData.atk);
+        atkSpeed  = new Stat(playerLvData.atkSpeed,  0f,                                     (1f + weaponLvData.atkSpeed + equipmentStats.AtkSpeed) / 100f);
+        def       = new Stat(playerLvData.def,       equipmentStats.Def);
+        moveSpeed = new Stat(playerLvData.moveSpeed);
+        range     = new Stat(playerLvData.range,     weaponLvData.range);
+         
     }
 }
 

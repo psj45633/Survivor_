@@ -4,24 +4,41 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-
-    [SerializeField] private BaseStatData baseStatData;
-    [SerializeField] private WeaponData weaponData;
-    [SerializeField] private Equipment equipment; 
-    public PlayerStats Stats {  get; private set; }
+    [SerializeField] private PlayerStats stats;
+    public PlayerStats Stats => stats;
 
     private void Awake()
     {
         Instance = this;
 
-        Stats = new PlayerStats(baseStatData, weaponData, equipment);
+        stats.Init();
     }
     void Start()
     {
         //Stats.Recalculate();
-        //Debug.Log("d");
-        weaponData = PlayerDataManager.Instance.SelectedWeaponData;
-        //Debug.Log("dd");
+        Init();
     }
 
+
+    private void Init()
+    {
+        SetBaseData();
+        SetWeapon();
+        SetEquipment();
+    }
+
+    private void SetBaseData()
+    {
+        stats.SetBaseData(DataManager.Instance.BaseStatData);
+    }
+
+    private void SetWeapon()
+    {
+        stats.SetWeapon(DataManager.Instance.SelectedWeaponData);
+    }
+
+    private void SetEquipment()
+    {
+
+    }
 }

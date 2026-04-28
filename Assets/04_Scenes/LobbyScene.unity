@@ -1727,7 +1727,7 @@ GameObject:
   - component: {fileID: 991998534}
   - component: {fileID: 991998533}
   m_Layer: 0
-  m_Name: PlayerDataManager
+  m_Name: DataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1745,6 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1a5200666b01947b24c3ac66e97c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataManager
+  baseStatData: {fileID: 11400000, guid: 2d6a5348fd82ea542ae3d794720f95f1, type: 2}
   selectedWeaponData: {fileID: 0}
 --- !u!4 &991998534
 Transform:

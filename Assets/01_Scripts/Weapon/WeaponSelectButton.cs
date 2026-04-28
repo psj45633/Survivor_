@@ -6,6 +6,6 @@ public class WeaponSelectButton : MonoBehaviour
 
     public void Click()
     {
-        PlayerDataManager.Instance.SelectWeapon(weaponData);
+        DataManager.Instance.SelectWeapon(weaponData);
     }
 }

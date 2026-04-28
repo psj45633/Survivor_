@@ -1665,17 +1665,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f312ae5d0f8c5f548bf08bb58931fa4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  baseStatData: {fileID: 11400000, guid: 2d6a5348fd82ea542ae3d794720f95f1, type: 2}
-  weaponData: {fileID: 11400000, guid: 089ca525f7823b146bbcefc595b27c4c, type: 2}
-  equipment:
-    head: {fileID: 0}
-    top: {fileID: 0}
-    bottom: {fileID: 0}
-    glove: {fileID: 0}
-    shoe: {fileID: 0}
+  stats:
+    baseData: {fileID: 11400000, guid: 2d6a5348fd82ea542ae3d794720f95f1, type: 2}
+    weaponData: {fileID: 0}
+    equipment:
+      head: {fileID: 0}
+      top: {fileID: 0}
+      bottom: {fileID: 0}
+      glove: {fileID: 0}
+      shoe: {fileID: 0}
+    playerLevel: 1
+    weaponLevel: 1
     maxHp: 0
     atk: 0
+    atkSpeed: 0
     def: 0
+    moveSpeed: 0
+    range: 0
 --- !u!114 &1791169769
 MonoBehaviour:
   m_ObjectHideFlags: 0

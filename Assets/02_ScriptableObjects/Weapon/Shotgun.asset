@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   type: 1
-  atk: 0
-  atkSpeed: 0
-  range: 0
-  count: 0
-  healthSteal: 0
-  slow: 0
-  angle: 0
-  chainRange: 0
+  id: 
+  weaponName: 
+  levelStats:
+  - level: 1
+    atk: 0
+    range: 0
+    atkSpeed: 0
+  - level: 2
+    atk: 0
+    range: 0
+    atkSpeed: 0
+  - level: 3
+    atk: 0
+    range: 0
+    atkSpeed: 0

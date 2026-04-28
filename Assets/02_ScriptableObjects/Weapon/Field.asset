@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: Field
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   type: 0
-  atk: 0
-  atkSpeed: 0
-  range: 0
-  count: 0
-  healthSteal: 0
-  slow: 0
-  angle: 0
-  chainRange: 0
+  id: 
+  weaponName: 
+  levelStats:
+  - level: 1
+    atk: 2
+    range: 1
+    atkSpeed: 1
+  - level: 2
+    atk: 3
+    range: 2
+    atkSpeed: 1
+  - level: 3
+    atk: 5
+    range: 3
+    atkSpeed: 0.8
