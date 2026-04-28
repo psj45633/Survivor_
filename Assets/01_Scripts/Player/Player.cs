@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         //Stats.Recalculate();
+        //Debug.Log("d");
+        weaponData = PlayerDataManager.Instance.SelectedWeaponData;
+        //Debug.Log("dd");
     }
 
 }
