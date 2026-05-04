@@ -10,7 +10,6 @@ public class Weapon : MonoBehaviour
 
     public void Init(WeaponData data)
     {
-        Debug.Log("weapon init()");
         this.data = data;
         attackSpeed = Player.Instance.Stats.AttackSpeed;
 
