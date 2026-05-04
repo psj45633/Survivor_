@@ -3,39 +3,39 @@ using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    public WeaponType type;
+    //public WeaponType type;
 
-    private IAttackLogic attackLogic;
+    //private IAttackLogic attackLogic;
 
-    public void Awake()
-    {
-        switch (type)
-        {
-            case WeaponType.Field:
-                attackLogic = new AoEAttackLogic();
+    //public void Init(WeaponType type)
+    //{
+    //    switch (type)
+    //    {
+    //        case WeaponType.Field:
+    //            attackLogic = new AoEAttackLogic();
 
-                break;
+    //            break;
             
-            case WeaponType.Shotgun:
-                attackLogic = new ProjectileAttackLogic();
+    //        case WeaponType.Shotgun:
+    //            attackLogic = new ProjectileAttackLogic();
 
-                break;
+    //            break;
             
-            case WeaponType.Staff_Chain:
-                attackLogic = new ChainAttackLogic();
+    //        case WeaponType.ChainLightning:
+    //            attackLogic = new ChainAttackLogic();
 
-                break;
+    //            break;
 
-            case WeaponType.Staff_Hitscan:
-                attackLogic = new HitscanAttackLogic();
+    //        case WeaponType.AreaDOT:
+    //            attackLogic = new AreaDOTAttackLogic();
 
-                break;
-        }
-    }
+    //            break;
+    //    }
+    //}
 
-    public void Attack(IDamageable target)
-    {
-        attackLogic?.Attack(transform, target);
-    }
+    //public void Attack(IDamageable target)
+    //{
+    //    attackLogic?.Attack(transform, target);
+    //}
 
 }

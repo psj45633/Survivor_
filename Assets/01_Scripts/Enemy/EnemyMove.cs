@@ -11,6 +11,12 @@ public class EnemyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+
+    }
+
+    public void Init(float spd)
+    {
+        speed = spd;
     }
 
     private void FixedUpdate()

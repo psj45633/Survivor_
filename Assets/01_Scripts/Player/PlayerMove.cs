@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
         srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
 
-        speed = Player.Instance.Stats.MoveSpeed;
+        //speed = Player.Instance.Stats.MoveSpeed;
     }
 
     void OnMove(InputValue value)
@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
+        Vector2 nextVec = inputVec * Player.Instance.Stats.MoveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
     }
 

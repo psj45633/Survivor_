@@ -5,6 +5,16 @@ public class AoEAttackLogic : IAttackLogic
     public void Attack(Transform origin, IDamageable target)
     {
         Debug.Log("범위 공격");
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin.position, Player.Instance.Stats.Range);
+
+        foreach(var hit in hits)
+        {
+            if(hit.TryGetComponent(out IDamageable dmg))
+            {
+                dmg.TakeDamage(Player.Instance.Stats.Attack);
+            }
+        }
     }
 }
 
@@ -24,10 +34,12 @@ public class ChainAttackLogic : IAttackLogic
     }
 }
 
-public class HitscanAttackLogic : IAttackLogic
+public class AreaDOTAttackLogic : IAttackLogic
 {
     public void Attack(Transform origin, IDamageable target)
     {
-        Debug.Log("즉발 공격");
+        Debug.Log("몰가w 공격");
+
+        target.TakeDamage(Player.Instance.Stats.Attack);
     }
 }

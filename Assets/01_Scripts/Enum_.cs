@@ -12,10 +12,10 @@ public enum EquipmentType
 
 public enum WeaponType
 {
-    Field,
+    AOE,
     Shotgun,
-    Staff_Chain,
-    Staff_Hitscan
+    ChainLightning,
+    AreaDOT
 }
 
 public enum PoolType

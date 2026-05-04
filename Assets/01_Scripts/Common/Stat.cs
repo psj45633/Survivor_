@@ -73,7 +73,7 @@ public class FinalStats
     {
         maxHp     = new Stat(playerLvData.maxHp,     equipmentStats.MaxHp);
         atk       = new Stat(playerLvData.atk,       equipmentStats.Atk + weaponLvData.atk);
-        atkSpeed  = new Stat(playerLvData.atkSpeed,  0f,                                     (1f + weaponLvData.atkSpeed + equipmentStats.AtkSpeed) / 100f);
+        atkSpeed  = new Stat(playerLvData.atkSpeed,  0f,                                     (1f + weaponLvData.atkSpeed + equipmentStats.AtkSpeed));
         def       = new Stat(playerLvData.def,       equipmentStats.Def);
         moveSpeed = new Stat(playerLvData.moveSpeed);
         range     = new Stat(playerLvData.range,     weaponLvData.range);

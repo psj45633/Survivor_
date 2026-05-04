@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e873b2b68a10b7488f2ce0ff128d5b2, type: 3}
-  m_Name: Staff_Hitscan
+  m_Name: ChainLightning
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  type: 3
-  atk: 0
-  atkSpeed: 0
-  range: 0
-  count: 0
-  healthSteal: 0
-  slow: 0
-  angle: 0
-  chainRange: 0
+  type: 2
+  weaponPrefab: {fileID: 7906680992055414155, guid: bee5c1b8fdb49354f80a1fff3dd8da68, type: 3}
+  id: 2
+  weaponName: 
+  levelStats:
+  - atk: 0
+    range: 0
+    atkSpeed: 0
+  - atk: 0
+    range: 0
+    atkSpeed: 0
+  - atk: 0
+    range: 0
+    atkSpeed: 0

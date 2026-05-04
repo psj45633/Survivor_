@@ -285,7 +285,6 @@ GameObject:
   - component: {fileID: 365951817}
   - component: {fileID: 365951816}
   - component: {fileID: 365951815}
-  - component: {fileID: 365951818}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -395,25 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMove
   targetPos: {x: 0, y: 0}
-  speed: 2
---- !u!114 &365951818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365951813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 367530520ddf768429551664bb1c325a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackCooltime: 0
-  detectRange: 0
-  damage: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 0
+  speed: 0
 --- !u!114 &365951819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +407,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b39e4b9a5c2474385ac6103f14fa04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  statData: {fileID: 11400000, guid: 8bcf7c445127fda42b6f220ba9f267cc, type: 2}
+  maxHp: 0
+  curHp: 0
+  atk: 0
+  atkSpd: 0
+  def: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &409326404
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,9 +802,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 673246132}
-  - component: {fileID: 673246133}
   m_Layer: 8
-  m_Name: Weapon
+  m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -835,19 +824,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1791169767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &673246133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673246131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a820e25e5cc9c7438d4e2ab915395df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
-  type: 0
 --- !u!1 &831822457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1643,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   stats:
     baseData: {fileID: 11400000, guid: 2d6a5348fd82ea542ae3d794720f95f1, type: 2}
-    weaponData: {fileID: 0}
+    weaponDatas:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     equipment:
       head: {fileID: 0}
       top: {fileID: 0}
@@ -1682,6 +1662,7 @@ MonoBehaviour:
     def: 0
     moveSpeed: 0
     range: 0
+  weaponHolder: {fileID: 673246132}
 --- !u!114 &1791169769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,9 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367530520ddf768429551664bb1c325a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackCooltime: 1
   detectRange: 3
-  damage: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -1838,7 +1817,6 @@ GameObject:
   - component: {fileID: 2061382775}
   - component: {fileID: 2061382774}
   - component: {fileID: 2061382773}
-  - component: {fileID: 2061382772}
   m_Layer: 10
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -1846,24 +1824,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2061382772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061382771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 367530520ddf768429551664bb1c325a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  attackCooltime: 0
-  detectRange: 0
-  damage: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &2061382773
 Rigidbody2D:
   serializedVersion: 5
@@ -1963,6 +1923,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b39e4b9a5c2474385ac6103f14fa04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  statData: {fileID: 11400000, guid: 8bcf7c445127fda42b6f220ba9f267cc, type: 2}
+  maxHp: 0
+  curHp: 0
+  atk: 0
+  atkSpd: 0
+  def: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &2061382777
 Transform:
   m_ObjectHideFlags: 0

@@ -1,73 +1,80 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour, IAttacker, IDamageable
+public class PlayerCombat : MonoBehaviour, IDamageable
 {
-    public float attackCooltime;
-    public float detectRange;
-    public float damage;
-    public IDamageable target;
-    public LayerMask targetMask;
+    [Header("Targeting")]
+    [SerializeField] private float detectRange;
+    [SerializeField] private LayerMask targetMask;
 
-    float timer;
-    WeaponHandler weapon;
+    private readonly List<Weapon> weapons = new();
+    private IDamageable target;
 
-    private void Awake()
+    private void Start()
     {
-        weapon = GetComponentInChildren<WeaponHandler>();
+        detectRange = Player.Instance.Stats.Range;
     }
 
-    void Update()
+    private void Update()
     {
         target = SelectTarget();
 
-        if (target == null)
+        for (int i = 0; i < weapons.Count; i++)
         {
-            timer = attackCooltime;
-            return;
-        }
-
-        timer += Time.deltaTime;
-
-        if (timer >= attackCooltime)
-        {
-            Attack(target);
-            timer = 0f;
+            weapons[i].Tick(target);
         }
     }
 
-    public void Attack(IDamageable target)
+    public void AddWeapon(Weapon weapon)
     {
-        weapon.Attack(target);
+        if (weapon == null) return;
+        if (weapons.Contains(weapon)) return;
+
+        weapons.Add(weapon);
     }
 
     public void TakeDamage(float damage)
     {
-
+        // 나중에 체력 처리
     }
 
-    public IDamageable SelectTarget()
+    private IDamageable SelectTarget()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectRange, targetMask);
 
-        IDamageable closestTarget = null;
-        float minDist = float.MaxValue;
+        List<IDamageable> targets = new();
+        List<float> weights = new();
+
+        float totalWeight = 0f;
 
         foreach (var hit in hits)
         {
-            IDamageable damageable = hit.GetComponent<IDamageable>();
-
-            if (damageable == null) continue;
+            if (!hit.TryGetComponent(out IDamageable damageable)) continue;
             if (damageable == (IDamageable)this) continue;
 
-            float dist = Vector2.Distance(transform.position, hit.transform.position);
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
 
-            if (dist < minDist)
+            float weight = 1f / Mathf.Max(distance, 0.1f);
+
+            targets.Add(damageable);
+            weights.Add(weight);
+            totalWeight += weight;
+        }
+
+        if (targets.Count == 0) return null;
+
+        float randomValue = Random.Range(0f, totalWeight);
+
+        for (int i = 0; i < targets.Count; i++)
+        {
+            randomValue -= weights[i];
+
+            if (randomValue <= 0f)
             {
-                minDist = dist;
-                closestTarget = damageable;
+                return targets[i];
             }
         }
 
-        return closestTarget;
+        return targets[targets.Count - 1];
     }
 }

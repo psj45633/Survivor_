@@ -10,21 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e873b2b68a10b7488f2ce0ff128d5b2, type: 3}
-  m_Name: Field
+  m_Name: AOE
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   type: 0
-  id: 
+  weaponPrefab: {fileID: 8327897304317315577, guid: 3b4cd4af0a019e844ae3bbe2d4e86170, type: 3}
+  id: 0
   weaponName: 
   levelStats:
-  - level: 1
-    atk: 2
+  - atk: 2
     range: 1
     atkSpeed: 1
-  - level: 2
-    atk: 3
+  - atk: 3
     range: 2
     atkSpeed: 1
-  - level: 3
-    atk: 5
+  - atk: 5
     range: 3
     atkSpeed: 0.8

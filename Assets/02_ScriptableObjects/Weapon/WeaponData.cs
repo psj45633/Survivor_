@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public WeaponType type;
+    public Weapon weaponPrefab;
 
     public string id;
     public string weaponName;

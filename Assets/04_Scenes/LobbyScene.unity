@@ -1747,6 +1747,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataManager
   baseStatData: {fileID: 11400000, guid: 2d6a5348fd82ea542ae3d794720f95f1, type: 2}
   selectedWeaponData: {fileID: 0}
+  weaponLevels:
+  - weaponType: 0
+    level: 0
+  - weaponType: 1
+    level: 0
+  - weaponType: 2
+    level: 0
+  - weaponType: 3
+    level: 0
 --- !u!4 &991998534
 Transform:
   m_ObjectHideFlags: 0

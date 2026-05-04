@@ -5,7 +5,7 @@ public class PlayerStats
 {
     [Header("Source Data")]
     [SerializeField] private BaseStatData baseData;
-    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private WeaponData[] weaponDatas;
     [SerializeField] private Equipment equipment;
 
     [Header("Level")]
@@ -41,7 +41,14 @@ public class PlayerStats
 
     public void SetWeapon(WeaponData newWeapon)
     {
-        weaponData = newWeapon;
+        if (newWeapon == null) return;
+
+        if (weaponDatas == null || weaponDatas.Length == 0)
+        {
+            weaponDatas = new WeaponData[1];
+        }
+
+        weaponDatas[0] = newWeapon;
         weaponLevel = DataManager.Instance.GetWeaponLevel(newWeapon);
         Recalculate();
     }
@@ -97,9 +104,15 @@ public class PlayerStats
 
     public void Recalculate()
     {
-        if (baseData == null || weaponData == null)
+        if (baseData == null)
         {
-            Debug.LogWarning("데이터가 설정되지 않음");
+            Debug.LogWarning("baseData가 설정되지 않음");
+            return;
+        }
+
+        if (weaponDatas == null || weaponDatas.Length == 0 || weaponDatas[0] == null)
+        {
+            Debug.LogWarning("무기 데이터가 설정되지 않음");
             return;
         }
 
@@ -109,8 +122,8 @@ public class PlayerStats
         PlayerLevelData playerLvData = baseData.GetLevelData(playerLevel);
 
         // 여기서 직접 가져오기
-        int weaponLevel = DataManager.Instance.GetWeaponLevel(weaponData);
-        WeaponLevelData weaponLvData = weaponData.GetLevelData(weaponLevel);
+        int weaponLevel = DataManager.Instance.GetWeaponLevel(weaponDatas[0]);
+        WeaponLevelData weaponLvData = weaponDatas[0].GetLevelData(weaponLevel);
 
         finalStats = new FinalStats(playerLvData, weaponLvData, equipment, baseData);
 

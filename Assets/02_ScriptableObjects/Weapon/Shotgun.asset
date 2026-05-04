@@ -13,18 +13,16 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   type: 1
-  id: 
+  weaponPrefab: {fileID: 8560718647858985269, guid: c716e5e94437c8f458ab8fdf25d66978, type: 3}
+  id: 1
   weaponName: 
   levelStats:
-  - level: 1
-    atk: 0
+  - atk: 0
     range: 0
     atkSpeed: 0
-  - level: 2
-    atk: 0
+  - atk: 0
     range: 0
     atkSpeed: 0
-  - level: 3
-    atk: 0
+  - atk: 0
     range: 0
     atkSpeed: 0
