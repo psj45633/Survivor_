@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] private Transform weaponHolder;
 
+    public PlayerExp exp;
+
     public PlayerStats Stats => stats;
 
     private PlayerCombat combat;
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         combat = GetComponent<PlayerCombat>();
+        exp = GetComponent<PlayerExp>();
     }
 
     private void Start()
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour
 
     private void SetEquipment()
     {
-        // 나중 구현
+        // 나중에 구현
     }
 
     private void CreateSelectedWeapon()

@@ -11,7 +11,8 @@ public class Weapon : MonoBehaviour
     public void Init(WeaponData data)
     {
         this.data = data;
-        attackSpeed = Player.Instance.Stats.AttackSpeed;
+        //attackSpeed = Player.Instance.Stats.AttackSpeed;
+        attackSpeed = data.levelStats[0].atkSpeed;
 
         switch (data.type)
         {
@@ -45,8 +46,29 @@ public class Weapon : MonoBehaviour
 
         if (timer >= 1f / attackSpeed)
         {
-            attackLogic?.Attack(transform, target);
+            attackLogic?.Attack(Player.Instance.transform, target);
             timer = 0f;
         }
+
+        //if (target == null) return;
+
+        //timer += Time.deltaTime;
+
+        //if (timer >= 1f / attackSpeed)
+        //{
+        //    attackLogic?.Attack(Player.Instance.transform, target);
+        //    timer = 0f;
+        //}
+
+        //timer += Time.deltaTime;
+
+        //if (target == null)
+        //    return;
+
+        //if (timer >= 1f / attackSpeed)
+        //{
+        //    attackLogic?.Attack(Player.Instance.transform, target);
+        //    timer = 0f;
+        //}
     }
 }

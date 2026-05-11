@@ -10,6 +10,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     private readonly List<Weapon> weapons = new();
     private IDamageable target;
 
+    public Transform Transform => transform;
+
     private void Start()
     {
         detectRange = Player.Instance.Stats.Range;

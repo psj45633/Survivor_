@@ -22,7 +22,8 @@ public class ObjectPool : MonoBehaviour
             // 미리 생성
             for (int j = 0; j < size; j++)
             {
-                GameObject obj = Instantiate(prefab, parent.transform);
+                Transform parentTransform = parent != null ? parent.transform : transform;
+                GameObject obj = Instantiate(prefab, parentTransform);
                 obj.SetActive(false);
                 pools[i].Add(obj);
             }
@@ -45,8 +46,10 @@ public class ObjectPool : MonoBehaviour
 
         // 부족하면 추가 생성
         GameObject prefab = prefabsAndSize[index].prefab;
+        GameObject parent = prefabsAndSize[index].parent;
+        Transform parentTransform = parent != null ? parent.transform : transform;
 
-        select = Instantiate(prefab, transform);
+        select = Instantiate(prefab, parentTransform);
         pools[index].Add(select);
 
         return select;

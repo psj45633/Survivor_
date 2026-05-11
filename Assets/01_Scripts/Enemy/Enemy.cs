@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
 {
     [SerializeField] private BaseStatData statData;
 
+    public Transform Transform => transform;
 
     [Header("Stats")]
     public float maxHp;
@@ -70,8 +71,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
 
     private void Die()
     {
-        //test
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private IEnumerator HitFlashCoroutine()
