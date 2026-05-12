@@ -36,39 +36,28 @@ public class Weapon : MonoBehaviour
 
     public void Tick(IDamageable target)
     {
-        if (target == null)
-        {
-            timer = 1f / attackSpeed;
-            return;
-        }
+        //if (target == null)
+        //{
+        //    timer = 1f / attackSpeed;
+        //    return;
+        //}
+
+        //timer += Time.deltaTime;
+
+        //if (timer >= 1f / attackSpeed)
+        //{
+        //    attackLogic?.Attack(Player.Instance.transform, target);
+        //    timer = 0f;
+        //}
 
         timer += Time.deltaTime;
+
+        if (target == null) return;
 
         if (timer >= 1f / attackSpeed)
         {
             attackLogic?.Attack(Player.Instance.transform, target);
             timer = 0f;
         }
-
-        //if (target == null) return;
-
-        //timer += Time.deltaTime;
-
-        //if (timer >= 1f / attackSpeed)
-        //{
-        //    attackLogic?.Attack(Player.Instance.transform, target);
-        //    timer = 0f;
-        //}
-
-        //timer += Time.deltaTime;
-
-        //if (target == null)
-        //    return;
-
-        //if (timer >= 1f / attackSpeed)
-        //{
-        //    attackLogic?.Attack(Player.Instance.transform, target);
-        //    timer = 0f;
-        //}
     }
 }

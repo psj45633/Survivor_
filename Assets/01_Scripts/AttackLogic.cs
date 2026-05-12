@@ -60,7 +60,7 @@ public class ChainAttackLogic : IAttackLogic
                 break;
 
             currentTarget.TakeDamage(Player.Instance.Stats.Attack);
-            Debug.Log(Player.Instance.Stats.Attack);
+            //Debug.Log(Player.Instance.Stats.Attack);
 
             hitTargets.Add(currentTarget);
 
@@ -94,6 +94,9 @@ public class ChainAttackLogic : IAttackLogic
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable damageable))
+                continue;
+
+            if (damageable.IsDead)
                 continue;
 
             if (hitTargets.Contains(damageable))

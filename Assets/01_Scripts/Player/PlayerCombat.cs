@@ -12,6 +12,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     public Transform Transform => transform;
 
+    public bool IsDead {  get; private set; }
+
     private void Start()
     {
         detectRange = Player.Instance.Stats.Range;
@@ -53,6 +55,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         {
             if (!hit.TryGetComponent(out IDamageable damageable)) continue;
             if (damageable == (IDamageable)this) continue;
+            if (damageable.IsDead) continue;
 
             float distance = Vector2.Distance(transform.position, hit.transform.position);
 

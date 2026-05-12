@@ -10,15 +10,17 @@ public class PlayerExp : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Image curExpImg;
+    [SerializeField] private LevelUpUI levelUpUI;
 
     private void Start()
     {
         Init();
+        curExpImg.fillAmount = 0;
     }
 
-    private float expPercet()
+    private float ExpPercet()
     {
-        return curExp / maxExp[lv];
+        return (float)curExp / maxExp[lv];
     }
 
 
@@ -30,12 +32,11 @@ public class PlayerExp : MonoBehaviour
 
     public void AddExp(int exp)
     {
-        if (lv > maxExp.Length) return;
+        if (lv >= maxExp.Length) return;
 
         curExp += exp;
-        if (curExp >= maxExp[lv])
+        if (lv < maxExp.Length && curExp >= maxExp[lv])
         {
-            curExp -= maxExp[lv];
             LevelUp();
         }
 
@@ -44,14 +45,20 @@ public class PlayerExp : MonoBehaviour
 
     private void UpdateExpUI()
     {
-
+        curExpImg.fillAmount = ExpPercet();
     }
 
     private void LevelUp()
     {
+        curExp -= maxExp[lv];
+        ShowSelect();
         lv++;
+    }
 
-        //게임 멈추고 선택지 띄우기
+    private void ShowSelect()
+    {
+        Time.timeScale = 0;
+        levelUpUI.Open();
     }
 
 

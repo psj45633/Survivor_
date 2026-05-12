@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
 
     public Transform Transform => transform;
 
+    public bool IsDead {  get; private set; }
+
     [Header("Stats")]
     public float maxHp;
     public float curHp;
@@ -18,8 +20,13 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
     public IDamageable target;
     public LayerMask targetMask;
 
+    [Header("Reward")]
+    [SerializeField] private int exp = 1;
+    [SerializeField] private int gold = 1;
+
     [Header("Hit")]
     private SpriteRenderer sr;
+    private Collider2D col;
     WaitForSeconds wait = new WaitForSeconds(0.05f);
     private Color orgColor = Color.white;
     private Color hitColor = Color.red;
@@ -27,14 +34,21 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
     private void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        col.enabled = false;
     }
-
-
-    void Start()
+    void OnEnable()
     {
+        IsDead = false;
         Init();
+
+        StartCoroutine(OnCollider());
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
     void Init()
     {
         var data = statData.levelStats[0];
@@ -55,6 +69,8 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (IsDead) return;
+
         curHp -= damage;
 
 
@@ -71,7 +87,12 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
 
     private void Die()
     {
+        if (IsDead) return;
+
+        IsDead = true;
+
         gameObject.SetActive(false);
+        GameManager.OnKillEnemy?.Invoke(exp, gold);
     }
 
     private IEnumerator HitFlashCoroutine()
@@ -80,4 +101,11 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
         yield return wait;
         sr.color = orgColor;
     }
+    
+    private IEnumerator OnCollider()
+    {
+        yield return wait;
+        col.enabled = true;
+    }
+
 }
