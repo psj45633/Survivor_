@@ -8,6 +8,12 @@ public class PlayerStats
     [SerializeField] private WeaponData[] weaponDatas;
     [SerializeField] private Equipment equipment;
 
+    [Header("Upgrade Bonus")]
+    [SerializeField] private float upgradeAtk;
+    [SerializeField] private float upgradeAtkSpeed;
+    [SerializeField] private float upgradeMoveSpeed;
+    [SerializeField] private float upgradeRange;
+
     [Header("Level")]
     [SerializeField] private int playerLevel = 1;
     [SerializeField] private int weaponLevel = 1;
@@ -128,10 +134,34 @@ public class PlayerStats
         finalStats = new FinalStats(playerLvData, weaponLvData, equipment, baseData);
 
         maxHp = finalStats.maxHp.Value;
-        atk = finalStats.atk.Value;
-        atkSpeed = finalStats.atkSpeed.Value;
+        atk = finalStats.atk.Value + upgradeAtk;
+        atkSpeed = finalStats.atkSpeed.Value * (1f + upgradeAtkSpeed);
         def = finalStats.def.Value;
-        moveSpeed = finalStats.moveSpeed.Value;
-        range = finalStats.range.Value;
+        moveSpeed = finalStats.moveSpeed.Value * (1f + upgradeMoveSpeed);
+        range = finalStats.range.Value + upgradeRange;
+    }
+
+    public void AddAttack(float value)
+    {
+        upgradeAtk += value;
+        Recalculate();
+    }
+
+    public void AddAttackSpeed(float value)
+    {
+        upgradeAtkSpeed += value;
+        Recalculate();
+    }
+
+    public void AddMoveSpeed(float value)
+    {
+        upgradeMoveSpeed += value;
+        Recalculate();
+    }
+
+    public void AddRange(float value)
+    {
+        upgradeRange += value;
+        Recalculate();
     }
 }

@@ -40,14 +40,17 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable
     void OnEnable()
     {
         IsDead = false;
+        sr.color = orgColor;
         Init();
 
         StartCoroutine(OnCollider());
+        col.enabled = true;
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+        col.enabled = false;
     }
     void Init()
     {

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform weaponHolder;
 
     public PlayerExp exp;
+    public PlayerUpgrade Upgrade {  get; private set; }
 
     public PlayerStats Stats => stats;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
         Instance = this;
         combat = GetComponent<PlayerCombat>();
         exp = GetComponent<PlayerExp>();
+        Upgrade = GetComponent<PlayerUpgrade>();
     }
 
     private void Start()

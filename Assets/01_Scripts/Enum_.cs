@@ -24,3 +24,16 @@ public enum PoolType
     Projectile,
     Effect
 }
+
+public enum UpgradeType
+{
+    Attack,
+    AttackSpeed,
+    MoveSpeed,
+    Range,
+
+    ChainCount,
+    ChainExplosion,
+
+    NewWeapon
+}

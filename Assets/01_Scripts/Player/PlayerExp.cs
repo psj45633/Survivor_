@@ -57,7 +57,6 @@ public class PlayerExp : MonoBehaviour
 
     private void ShowSelect()
     {
-        Time.timeScale = 0;
         levelUpUI.Open();
     }
 
